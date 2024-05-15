@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о пользователе</title>
+    {% extends "base.html" %}
+    {% load static %}
+    <link rel = "stylesheet" type="text/css" href={% static 'show_info.css' %}>
+</head>
+<body>
+{% block content %}
+    <h1 class="title-pen"> Profile of resident</h1>
+    <div class="user-profile">
+        <img src="{{ resident.photo.url }}" alt="avatar" class="avatar"/>
+        <div class="username">
+            {{ resident.first_name }} {{ resident.last_name }}
+        </div>
+        <div class="bio">
+          {{resident.district}}
+        </div>
+        <div class="city">
+
+        </div>
+    </div>
+    <div class="housing">
+        <div class="name">Жилье</div>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Площадь</th>
+              <th scope="col">Адрес</th>
+              <th scope="col">Стоимость</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for housing in housings  %}
+            <tr>
+                <th scope="row">{{ housing.area }} м<sup>2</sup></th>
+                <td>{{ housing.address }}</td>
+                <td>{{ housing.cost }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Government</title>
+     {% extends "base.html" %}
+    {% load static %}
+    <link rel = "stylesheet" type="text/css" href={% static 'show_info.css' %}>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <div class="mx-auto d-grid gap-2" style="margin-top: 45vh; width: 500px">
+            {% for city in cities %}
+            <a href="{% url 'resident_ofCities' city.name_city %}" class="btn btn-primary" type="button">{{ city.name_city }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>
+

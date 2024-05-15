@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization/registration</title>
+    {% load static %}
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href={% static '/css/style.css' %}>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+    <body>
+        <div class="main">
+            <input type="checkbox" id="chk" aria-hidden="true">
+            <div class="signup">
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="chk" aria-hidden="true">Registration</label>
+                    <input type="text" id="input_username" name="create_user_name" placeholder="User name" required="">
+                    <input type="email" name="create_email" placeholder="Email" required="">
+                    <input type="password" name="create_password" placeholder="Password" required="">
+                    <button href="{% url 'register_resident' %}">Create an account</button>
+                </form>
+            </div>
+
+            <div class="login">
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="chk" aria-hidden="true">Authorization</label>
+                    <input type="email" name="email" placeholder="Email" required="">
+                    <input type="password" name="password" placeholder="Password" required="">
+                    <button>Enter</button>
+                </form>
+            </div>
+        </div>
+   {% block javascript %}
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+       <script>
+           $(document).ready(function (){
+               $('#input_username').keyup(function (){
+                   $.ajax(
+                       {
+                            data: $(this).serialize(),
+                            url: "{% url 'validate_username' %}",
+                            success:
+                            function (response){
+                                if ($('#usernameError').length == 0)
+                                    $('#input_username').after('<div class="invalid-feedback d-block" id="usernameError" style="text-align: center;"></div>');
+                                if (response.taken == true) {
+                                    $('#input_username').removeClass('is-valid').addClass('is-invalid');
+                                    $('#usernameError').removeClass('valid-feedback').addClass('invalid-feedback').text("Такое имя пользователя уже существует");
+                                    $('#register_button').prop('disabled', true);
+                                } else {
+                                    $('#input_username').removeClass('is-invalid').addClass('is-valid');
+                                    $('#usernameError').removeClass('invalid-feedback').addClass('valid-feedback').text("Такое имя пользователя доступно");
+                                    $('#register_button').prop('disabled', false);
+                                }
+                            },
+                           error: function (response){
+                               console.log(response.responseJSON.errors);
+                           }
+                        });
+                   return false;
+               });
+               $('#input_email').keyup(function () {
+                   $.ajax({
+                       data: $(this).serialize(),
+                       url: "{% url 'validate_email' %}",
+
+                       success: function (response) {
+                           if ($('#emailError').length == 0)
+                               $('#input_email').after('<div class="invalid-feedback d-block" id="emailError" style="text-align: center;"></div>');
+
+                           if (response.taken ==true) {
+                               $('#input_email').removeClass('is-valid').addClass('is-invalid');
+                               $('#emailError').removeClass('valid-feedback').addClass('invalid-feedback').text("Такой адрес электронной почты уже существует");
+                               $('#register_button').prop('disabled', true);
+                           } else {
+                               $('#input_email').removeClass('is-invalid').addClass('is-valid');
+                               $('#emailError').removeClass('invalid-feedback').addClass('valid-feedback').text("Такой адрес электронной почты доступен");
+                               $('#register_button').prop('disabled', false);
+                           }
+                       },
+                       error: function (response) {
+                           console.log(response.responseJSON.errors);
+                       }
+                   });
+                   return false;
+               });
+           });
+       </script>
+{% endblock javascript %}
+</body>
+</html>

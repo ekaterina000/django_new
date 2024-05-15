@@ -1,0 +1,92 @@
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #969696;
+}
+
+.title-pen {
+  text-align: center;
+  color: #000000;
+  font-size: 70px;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 200px;
+    height: 250px;
+    border-radius: 10%;
+}
+
+.username {
+  margin-top: 16px;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.btn-primary {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #cccccc;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.bio {
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+}
+.name {
+  text-align: center;
+  font-style: italic;
+  font-size: x-large;
+}
+.housing {
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th,
+.table td {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.table th {
+  font-weight: bold;
+  text-align: left;
+}
+
+
+a {
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel = "stylesheet" type="text/css" href={% static 'show_info.css' %}>
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg" style="background: #4a4a4ab7">
+      <div class="container-fluid">
+        <a class="navbar-brand">Managing residents from government</a>
+          <a href={% url 'logout' %} class="btn btn-danger" type="submit">Exit</a>
+        </div>
+      </div>
+    </nav>
+
+</header>
+<body>
+{% block content %}
+{% endblock %}
+</body>
+</html>
